@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as FoodProductsRouteImport } from './routes/food-products'
 import { Route as RealEstateRouteImport } from './routes/real-estate'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodProductsRoute = FoodProductsRouteImport.update({
@@ -38,12 +44,14 @@ const RealEstateRoute = RealEstateRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/finance': typeof FinanceRoute
   '/food-products': typeof FoodProductsRoute
   '/real-estate': typeof RealEstateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/finance': typeof FinanceRoute
   '/food-products': typeof FoodProductsRoute
   '/real-estate': typeof RealEstateRoute
 }
@@ -51,20 +59,23 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/finance': typeof FinanceRoute
   '/food-products': typeof FoodProductsRoute
   '/real-estate': typeof RealEstateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/food-products' | '/real-estate'
+  fullPaths: '/' | '/about' | '/finance' | '/food-products' | '/real-estate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/food-products' | '/real-estate'
-  id: '__root__' | '/' | '/about' | '/food-products' | '/real-estate'
+  to: '/' | '/about' | '/finance' | '/food-products' | '/real-estate'
+  id:
+    '__root__' | '/' | '/about' | '/finance' | '/food-products' | '/real-estate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FinanceRoute: typeof FinanceRoute
   FoodProductsRoute: typeof FoodProductsRoute
   RealEstateRoute: typeof RealEstateRoute
 }
@@ -83,6 +94,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/food-products': {
@@ -105,6 +123,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FinanceRoute: FinanceRoute,
   FoodProductsRoute: FoodProductsRoute,
   RealEstateRoute: RealEstateRoute,
 }
