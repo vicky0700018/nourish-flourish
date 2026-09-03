@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as FoodProductsRouteImport } from './routes/food-products'
+import { Route as RealEstateRouteImport } from './routes/real-estate'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const FoodProductsRoute = FoodProductsRouteImport.update({
   path: '/food-products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RealEstateRoute = RealEstateRouteImport.update({
+  id: '/real-estate',
+  path: '/real-estate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/food-products': typeof FoodProductsRoute
+  '/real-estate': typeof RealEstateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/food-products': typeof FoodProductsRoute
+  '/real-estate': typeof RealEstateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/food-products': typeof FoodProductsRoute
+  '/real-estate': typeof RealEstateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/food-products'
+  fullPaths: '/' | '/about' | '/food-products' | '/real-estate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/food-products'
-  id: '__root__' | '/' | '/about' | '/food-products'
+  to: '/' | '/about' | '/food-products' | '/real-estate'
+  id: '__root__' | '/' | '/about' | '/food-products' | '/real-estate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   FoodProductsRoute: typeof FoodProductsRoute
+  RealEstateRoute: typeof RealEstateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoodProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/real-estate': {
+      id: '/real-estate'
+      path: '/real-estate'
+      fullPath: '/real-estate'
+      preLoaderRoute: typeof RealEstateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   FoodProductsRoute: FoodProductsRoute,
+  RealEstateRoute: RealEstateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
