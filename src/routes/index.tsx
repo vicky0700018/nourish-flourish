@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import {
   BusinessVerticalCard,
@@ -286,5 +286,3 @@ function Home() {
     </>
   );
 }
-
-export { Button };
