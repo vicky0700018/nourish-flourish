@@ -26,7 +26,7 @@ export const Route = createFileRoute("/food-products")({
       },
     ],
   }),
-  component: FoodProducts;
+  component: FoodProducts,
 });
 
 const pillars = [
